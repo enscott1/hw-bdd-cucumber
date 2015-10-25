@@ -27,6 +27,16 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step to "submit" the search form on the homepage
   # enter step(s) to ensure that PG and R movies are visible
   # enter step(s) to ensure that other movies are not visible
+  When I check the following ratings: PG,R
+  When I uncheck the following ratings: PG-13,NC-17,G
+  And I press "Refresh"
+  Then I should be on the home page
+  And I should see "Amelie"
+  And I should see "Raiders of the Lost Ark"
+  And I should not see "The Help"
+  And I should not see "Chocolat"
 
 Scenario: all ratings selected
-  # see assignment
+  When I check the following ratings: G,PG,PG-13,NC-17,R
+  And I press "Refresh"
+  Then I should see all the movies
