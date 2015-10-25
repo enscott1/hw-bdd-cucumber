@@ -37,5 +37,8 @@ end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  Movie.all.count == 10
+  movies = Movie.all
+  movies.each do |movie|
+    assert true unless page.body =~ /#{movie.title}/m
+  end
 end
